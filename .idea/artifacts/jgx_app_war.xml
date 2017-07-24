@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="jgx-app:war">
+    <output-path>$PROJECT_DIR$/jgx-app/target</output-path>
+    <root id="archive" name="jgx-app-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="jgx-app:war exploded" />
+    </root>
+  </artifact>
+</component>

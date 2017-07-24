@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="jgx-wechat:war">
+    <output-path>$PROJECT_DIR$/jgx-wechat/target</output-path>
+    <root id="archive" name="jgx-wechat.war">
+      <element id="artifact" artifact-name="jgx-wechat:war exploded" />
+    </root>
+  </artifact>
+</component>

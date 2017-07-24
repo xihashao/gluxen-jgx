@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/tx
+                		http://www.springframework.org/schema/tx/spring-tx.xsd
+                     	http://www.springframework.org/schema/aop
+                     	http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    <bean id="parentDataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="maxActive" value="30" />
+        <property name="initialSize" value="2" />
+        <property name="maxWait" value="30000" />
+        <property name="maxIdle" value="30" />
+        <property name="minIdle" value="1" />
+        <property name="testOnBorrow" value="false"></property>
+        <property name="testWhileIdle" value="true"></property>
+        <property name="validationQuery" value="select 1 from dual"></property>
+        <property name="timeBetweenEvictionRunsMillis"><value>30000</value></property>
+        <property name="numTestsPerEvictionRun"><value>10</value></property>
+        <property name="minEvictableIdleTimeMillis" value="30000"></property>
+    </bean>
+    <bean id="dataSource" parent="parentDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="url" value="${trip.mall.jdbc.url}" />
+        <property name="username" value="${trip.mall.jdbc.username}" />
+        <property name="password" value="${trip.mall.jdbc.password}" />
+    </bean>
+
+
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <!-- 启动spring事务注解，事务注解尽在此 -->
+    <tx:annotation-driven transaction-manager="transactionManager" />
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="mapperLocations" value="classpath*:com/gluxen/jgx/dao/mapper/**/*Mapper.xml" />
+    </bean>
+    <!--    LOB 代表大对象数据，包括 BLOB 和 CLOB 两种类型，前者用于存储大块的二进制数据，如图片数据，视频数据等，而后者用于存储长文本数据，如论坛的帖子内容，产品的详细描述等。-->
+    <!--    Spring 大大降低了我们处理 LOB 数据的难度。首先，Spring 提供了 NativeJdbcExtractor 接口，您可以在不同环境里选择相应的实现类从数据源中获取本地 JDBC 对象；其次，Spring 通过 LobCreator 接口取消了不同数据厂商操作 LOB 数据的差别，并提供了创建 LobCreator 的 LobHandler 接口，您只要根据底层数据库类型选择合适的 LobHandler 进行配置即可-->
+    <!--<bean id="defaultLobHandler"
+          class="org.springframework.jdbc.support.lob.DefaultLobHandler"
+          lazy-init="true"/>-->
+    <!-- 查 找 类 路 径 下 的 映 射 器 并 自 动 将 它 们 创 建 成 MapperFactoryBean-->
+    <!-- 配置SqlSessionTemplate -->
+    <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory" />
+    </bean>
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.gluxen.jgx.dao.mapper" />
+        <!--<property name="sqlSessionTemplateBeanName" value="sqlSessionTemplate"/>-->
+    </bean>
+</beans>

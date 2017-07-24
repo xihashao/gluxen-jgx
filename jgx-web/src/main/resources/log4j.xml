@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+    <appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %p - %C[%L] - %m \n" />
+		</layout>
+	</appender>
+    <appender name="DEFAULT_FILE" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="encoding" value="UTF-8" />
+        <param name="file" value="${trip.mall.log.root}/trip/mall/default.log" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d %p - %C[%L] - %m \n" />
+        </layout>
+    </appender>
+
+    <appender name="EXCEPTION_FILE" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="encoding" value="UTF-8" />
+        <param name="file" value="${trip.mall.log.root}/trip/mall/exception.log" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d %p - %C[%L] - %m \n" />
+        </layout>
+    </appender>
+
+
+     <category name="DEFAULT" additivity="true">
+        <priority value="${trip.mall.log.level}" />
+        <appender-ref ref="DEFAULT_FILE" />
+        <appender-ref ref="CONSOLE" />
+    </category>
+
+
+    <category name="EXCEPTION" additivity="true">
+        <priority value="${trip.mall.log.level}" />
+        <appender-ref ref="EXCEPTION_FILE" />
+        <appender-ref ref="CONSOLE" />
+    </category>
+	<root>
+		<priority value="${trip.mall.log.level}" />
+		<appender-ref ref="DEFAULT_FILE" />
+		<appender-ref ref="CONSOLE" />
+	</root>
+
+</log4j:configuration>

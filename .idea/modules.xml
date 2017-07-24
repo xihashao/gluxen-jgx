@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/gluxen-jgx.iml" filepath="$PROJECT_DIR$/gluxen-jgx.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jgx-app/jgx-app.iml" filepath="$PROJECT_DIR$/jgx-app/jgx-app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jgx-common/jgx-common.iml" filepath="$PROJECT_DIR$/jgx-common/jgx-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jgx-dao/jgx-dao.iml" filepath="$PROJECT_DIR$/jgx-dao/jgx-dao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jgx-domain/jgx-domain.iml" filepath="$PROJECT_DIR$/jgx-domain/jgx-domain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jgx-service/jgx-service.iml" filepath="$PROJECT_DIR$/jgx-service/jgx-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jgx-web/jgx-web.iml" filepath="$PROJECT_DIR$/jgx-web/jgx-web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jgx-wechat/jgx-wechat.iml" filepath="$PROJECT_DIR$/jgx-wechat/jgx-wechat.iml" />
+    </modules>
+  </component>
+</project>
